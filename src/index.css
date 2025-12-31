@@ -1,0 +1,298 @@
+:root {
+  --bg-black: #050505;
+  --card-bg: #121212;
+  --primary-gradient: linear-gradient(135deg, #8A2BE2, #4B0082);
+  --text-white: #ffffff;
+  --text-gray: #94a3b8;
+  --input-bg: #1e1e1e;
+  --input-border: #333;
+  --purple-glow: rgba(138, 43, 226, 0.4);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Outfit', sans-serif;
+}
+
+#root {
+  width: 100%;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  background-color: var(--bg-black);
+  color: var(--text-white);
+  min-height: 100vh;
+  /* Allow growing, don't fix height */
+  position: relative;
+}
+
+/* Utility for pages that need centering (like AuthPage) */
+.page-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+  /* Removed overflow: hidden to prevent clipping */
+}
+
+/* Background "Code" Effect - simplified aesthetic */
+.code-bg {
+  position: fixed;
+  /* Fixed to cover screen even when scrolling */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image:
+    linear-gradient(rgba(10, 10, 10, 0.9), rgba(10, 10, 10, 0.9)),
+    url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23222' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  z-index: -1;
+}
+
+.container {
+  width: 100%;
+  max-width: 480px;
+  /* Wider for better PC feel */
+  padding: 20px;
+}
+
+.auth-card {
+  background-color: var(--card-bg);
+  border-radius: 24px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  position: relative;
+  border: 1px solid #222;
+}
+
+/* Header Section */
+.auth-header {
+  background: var(--primary-gradient);
+  padding: 40px 30px 60px;
+  /* Extra padding bottom for the curve/slant */
+  text-align: center;
+  position: relative;
+  /* Creating the slanted look */
+  clip-path: polygon(0 0, 100% 0, 100% 85%, 0% 100%);
+  transition: all 0.3s ease;
+}
+
+.auth-header h1 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: opacity 0.3s;
+}
+
+.auth-header p {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 300;
+  transition: opacity 0.3s;
+}
+
+/* Auth Body */
+.auth-body {
+  padding: 30px;
+  padding-top: 10px;
+}
+
+/* Forms */
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  animation: fadeIn 0.4s ease forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Input Group */
+.input-group {
+  position: relative;
+}
+
+.input-icon {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-gray);
+  font-size: 1.1rem;
+  transition: color 0.3s;
+}
+
+.input-group input {
+  width: 100%;
+  background-color: var(--input-bg);
+  border: 1px solid transparent;
+  padding: 14px 14px 14px 48px;
+  /* Room for icon */
+  border-radius: 12px;
+  color: var(--text-white);
+  font-size: 1rem;
+  outline: none;
+  transition: all 0.3s;
+}
+
+.input-group input:focus {
+  border-color: #8A2BE2;
+  box-shadow: 0 0 0 4px rgba(138, 43, 226, 0.1);
+}
+
+.input-group input:focus+.input-icon {
+  color: #8A2BE2;
+}
+
+.input-group input::placeholder {
+  color: #555;
+}
+
+/* Buttons */
+.btn-primary {
+  background: var(--primary-gradient);
+  border: none;
+  padding: 14px;
+  border-radius: 50px;
+  /* Pill shape */
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  margin-top: 10px;
+}
+
+.btn-primary:active {
+  transform: scale(0.98);
+}
+
+.btn-primary:hover {
+  box-shadow: 0 8px 20px var(--purple-glow);
+}
+
+/* Links and Footer */
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  font-size: 0.85rem;
+}
+
+.forgot-pass {
+  color: var(--text-gray);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.forgot-pass:hover {
+  color: #fff;
+}
+
+.toggle-box {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 0.9rem;
+  color: var(--text-gray);
+}
+
+.toggle-link {
+  color: #8A2BE2;
+  cursor: pointer;
+  font-weight: 600;
+  margin-left: 5px;
+  transition: text-shadow 0.3s;
+}
+
+.toggle-link:hover {
+  text-shadow: 0 0 10px var(--purple-glow);
+}
+
+/* Social Login */
+.social-divider {
+  text-align: center;
+  margin: 20px 0;
+  position: relative;
+  font-size: 0.85rem;
+  color: var(--text-gray);
+}
+
+.social-divider::before,
+.social-divider::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 30%;
+  height: 1px;
+  background: #333;
+}
+
+.social-divider::before {
+  left: 0;
+}
+
+.social-divider::after {
+  right: 0;
+}
+
+.social-buttons {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.btn-social {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid transparent;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-size: 0.95rem;
+}
+
+.btn-google {
+  background: #fff;
+  color: #333;
+}
+
+.btn-google:hover {
+  background: #f1f1f1;
+}
+
+.btn-github {
+  background: #24292e;
+  color: #fff;
+  border: 1px solid #333;
+}
+
+.btn-github:hover {
+  background: #2f363d;
+  border-color: #fff;
+}

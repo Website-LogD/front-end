@@ -10,7 +10,10 @@ jobs:
     runs-on: self-hosted
 
     steps:
-      - name: Run local deploy script
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run deploy script
         run: |
-          cd ~/website/frontend
+          chmod +x scripts/deploy.sh
           ./scripts/deploy.sh

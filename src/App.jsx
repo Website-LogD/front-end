@@ -41,7 +41,7 @@ const AuthPage = () => {
       const data = await response.json();
       if (response.ok) {
         // Success! Redirect to Dashboard
-        navigate('/dashboard');
+        navigate('/dashboard', { state: { username: data.user } });
       } else {
         setMessage(`Error: ${data.detail || "Login failed"}`);
       }
@@ -61,6 +61,22 @@ const AuthPage = () => {
       const data = await response.json();
       if (response.ok) {
         setMessage(`Success: ${data.message}`);
+
+        // Auto-login after successful registration
+        try {
+          const loginResponse = await fetch('/api/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username, password })
+          });
+          const loginData = await loginResponse.json();
+
+          if (loginResponse.ok) {
+            navigate('/dashboard', { state: { username: loginData.user || username } });
+          }
+        } catch (loginError) {
+          console.error("Auto-login error:", loginError);
+        }
       } else {
         setMessage(`Error: ${data.detail || "Registration failed"}`);
       }

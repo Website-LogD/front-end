@@ -90,7 +90,7 @@ const AuthPage = () => {
       <div className="container">
         <div className="auth-card">
           <div className="auth-header">
-            <h1>{isLogin ? "WELCOME !" : "CREATE ACCOUNT"}</h1>
+            <h1>{isLogin ? "WELCOME BACK !" : "CREATE ACCOUNT"}</h1>
             <p>{isLogin ? "We are glad to see you again." : "Join us and start your journey."}</p>
           </div>
 
